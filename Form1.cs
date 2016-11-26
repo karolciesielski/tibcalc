@@ -25,7 +25,14 @@ namespace tibicalc
             //string profesja = listBox1.SelectedItem.ToString();
             string poziom = textBox1.Text;
 
-            if(profesja == null)
+            string profesjaString = (profesja == null)
+                ? string.Empty
+                : profesja.ToString();
+
+            int poziomLiczba = 0;
+            bool toJestLiczba = int.TryParse(poziom, out poziomLiczba);
+
+            if (profesja == null)
             {
                 MessageBox.Show("Wybierz profesję");
                 return;
@@ -36,9 +43,6 @@ namespace tibicalc
                 MessageBox.Show("Wpisz poziom");
                 return;
             }
-
-            int poziomLiczba = 0;
-            bool toJestLiczba = int.TryParse(poziom, out poziomLiczba);
 
             if(toJestLiczba)
             {
@@ -54,7 +58,27 @@ namespace tibicalc
                 return;
             }
 
-            richTextBox1.Text = string.Format("Profesja: {0}\nPoziom: {1}", profesja, poziom);
+            int punktyZycia = 0;
+            int doswiadczenie = 50 * (int)(Math.Pow(poziomLiczba, 2)) - (150 * poziomLiczba) + 200;
+
+            switch (profesjaString)
+            {
+                case "Knight":
+                    punktyZycia = poziomLiczba * 3;
+                    break;
+                case "Paladin":
+                    punktyZycia = poziomLiczba * 2;
+                    break;
+                //case "Druid":
+                //case "Sorc":
+                //    punktyZycia = poziomLiczba;
+                //    break;
+                default:
+                    punktyZycia = poziomLiczba;
+                    break;
+            }
+
+            richTextBox1.Text = string.Format("Profesja: {0}\nPoziom: {1}\nPunkty zycia: {2}\nDoświadczenie: {3}", profesja, poziom, punktyZycia, doswiadczenie );
             //"Profesja: " + profesja + "\nPoziom: " + poziom;
         }
     }
