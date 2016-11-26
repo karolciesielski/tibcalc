@@ -58,27 +58,44 @@ namespace tibicalc
                 return;
             }
 
+            int poziomOpuszczeniaRookgaard = 8;
             int punktyZycia = 0;
-            int doswiadczenie = 50 * (int)(Math.Pow(poziomLiczba, 2)) - (150 * poziomLiczba) + 200;
+            int doswiadczenie = ((50 * (int)(Math.Pow((poziomLiczba - 1), 3))) - (150 * (int)(Math.Pow((poziomLiczba - 1), 2))) + (400 * (poziomLiczba -1)))/3;
+            int expdolvla = 50 * (int)(Math.Pow(poziomLiczba, 2)) - (150 * poziomLiczba) + 200;
+            int punktyMany = 0;
+            int capacity = 0;
+            //int baseSpeed = 0;
 
             switch (profesjaString)
             {
                 case "Knight":
-                    punktyZycia = poziomLiczba * 3;
+                    punktyZycia = 5 * ((3 * poziomLiczba) - 2 * poziomOpuszczeniaRookgaard + 29);
+                    punktyMany = 5 * (poziomLiczba + 10);
+                    capacity = 5 * ((5 * poziomLiczba) - (5 * poziomOpuszczeniaRookgaard) + 94);
+                    //baseSpeed = 220 + (2 * (poziomLiczba - 1));
+
                     break;
                 case "Paladin":
-                    punktyZycia = poziomLiczba * 2;
+                    punktyZycia = 5 *((2 * poziomLiczba) - 8 + 29);
+                    punktyMany = 5 * ((3 * poziomLiczba) - (2 * poziomOpuszczeniaRookgaard) + 10);
+                    capacity = 10 * ((2 * poziomLiczba) - poziomOpuszczeniaRookgaard + 39);
+                    //baseSpeed = 220 + (2 * (poziomLiczba - 1));
                     break;
-                //case "Druid":
-                //case "Sorc":
-                //    punktyZycia = poziomLiczba;
-                //    break;
+                case "Sorc/Druid":
+                    punktyZycia = 5 * (poziomLiczba + 29);
+                    punktyMany = 5 * ((6 * poziomLiczba) - (5 * poziomOpuszczeniaRookgaard) + 10);
+                    capacity = 10 * (poziomLiczba + 39);
+                    //baseSpeed = 220 + (2 * (poziomLiczba - 1));
+                    break;
                 default:
-                    punktyZycia = poziomLiczba;
+                    punktyZycia = 5 *(poziomLiczba + 29);
+                    punktyMany = 5 * (poziomLiczba + 10);
+                    capacity = 10 * (poziomLiczba + 39);
+                    //baseSpeed = 220 + (2 * (poziomLiczba - 1));
                     break;
             }
 
-            richTextBox1.Text = string.Format("Profesja: {0}\nPoziom: {1}\nPunkty zycia: {2}\nDoświadczenie: {3}", profesja, poziom, punktyZycia, doswiadczenie );
+            richTextBox1.Text = string.Format("Profesja: {0}\nPoziom: {1}\n\nDoświadczenie: {2} exp\nDo Lvl'a: {3} exp\n\nCapacity: {4}\nPunkty zycia: {5}\nPunkty many: {6}", profesja, poziom, doswiadczenie, expdolvla, capacity, punktyZycia, punktyMany  );
             //"Profesja: " + profesja + "\nPoziom: " + poziom;
         }
     }
