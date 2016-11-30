@@ -23,14 +23,16 @@ namespace tibicalc
         {
             object profesja = listBox1.SelectedItem;
             //string profesja = listBox1.SelectedItem.ToString();
-            string poziom = textBox1.Text;
+            string lvl = textBox1.Text;
+            string mlvl = textBox2.Text;
+            
 
             string profesjaString = (profesja == null)
                 ? string.Empty
                 : profesja.ToString();
 
             int poziomLiczba = 0;
-            bool toJestLiczba = int.TryParse(poziom, out poziomLiczba);
+            bool toJestLiczba = int.TryParse(lvl, out poziomLiczba);
 
             if (profesja == null)
             {
@@ -38,9 +40,9 @@ namespace tibicalc
                 return;
             }
 
-            if (string.IsNullOrEmpty(poziom))
+            if (string.IsNullOrEmpty(lvl))
             {
-                MessageBox.Show("Wpisz poziom");
+                MessageBox.Show("Wpisz LVL");
                 return;
             }
 
@@ -48,13 +50,42 @@ namespace tibicalc
             {
                 if (poziomLiczba < 0)
                 {
-                    MessageBox.Show("Wpisz poziom wyższy od zera");
+                    MessageBox.Show("Wpisz LVL wyższy od zera");
                     return;
                 }
             }
             else
             {
-                MessageBox.Show("Wpisz liczbę");
+                MessageBox.Show("Wpisz liczbę w polu LVL");
+                return;
+            }
+
+            int mlvlLiczba = 0;
+            bool toJestLiczba2 = int.TryParse(mlvl, out mlvlLiczba);
+
+            if (profesja == null)
+            {
+                MessageBox.Show("Wybierz profesję");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(mlvl))
+            {
+                MessageBox.Show("Wpisz MLVL");
+                return;
+            }
+
+            if (toJestLiczba2)
+            {
+                if (mlvlLiczba < 0)
+                {
+                    MessageBox.Show("Wpisz MLVL wyższy od zera");
+                    return;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Wpisz liczbę w polu MLVL");
                 return;
             }
 
@@ -64,7 +95,8 @@ namespace tibicalc
             int expdolvla = 50 * (int)(Math.Pow(poziomLiczba, 2)) - (150 * poziomLiczba) + 200;
             int punktyMany = 0;
             int capacity = 0;
-            //int baseSpeed = 0;
+            decimal manaNaMlvl = 0;
+            int baseSpeed = 110 + poziomLiczba - 1;
 
             switch (profesjaString)
             {
@@ -72,30 +104,28 @@ namespace tibicalc
                     punktyZycia = 5 * ((3 * poziomLiczba) - 2 * poziomOpuszczeniaRookgaard + 29);
                     punktyMany = 5 * (poziomLiczba + 10);
                     capacity = 5 * ((5 * poziomLiczba) - (5 * poziomOpuszczeniaRookgaard) + 94);
-                    //baseSpeed = 220 + (2 * (poziomLiczba - 1));
-
+                    manaNaMlvl = 1600 * 3m * mlvlLiczba;
                     break;
                 case "Paladin":
                     punktyZycia = 5 *((2 * poziomLiczba) - 8 + 29);
                     punktyMany = 5 * ((3 * poziomLiczba) - (2 * poziomOpuszczeniaRookgaard) + 10);
                     capacity = 10 * ((2 * poziomLiczba) - poziomOpuszczeniaRookgaard + 39);
-                    //baseSpeed = 220 + (2 * (poziomLiczba - 1));
+                    manaNaMlvl = (1600 * 1.4m * mlvlLiczba);
                     break;
                 case "Sorc/Druid":
                     punktyZycia = 5 * (poziomLiczba + 29);
                     punktyMany = 5 * ((6 * poziomLiczba) - (5 * poziomOpuszczeniaRookgaard) + 10);
                     capacity = 10 * (poziomLiczba + 39);
-                    //baseSpeed = 220 + (2 * (poziomLiczba - 1));
+                    manaNaMlvl = 1600 * 1.1m * mlvlLiczba;
                     break;
                 default:
                     punktyZycia = 5 *(poziomLiczba + 29);
                     punktyMany = 5 * (poziomLiczba + 10);
                     capacity = 10 * (poziomLiczba + 39);
-                    //baseSpeed = 220 + (2 * (poziomLiczba - 1));
                     break;
             }
-
-            richTextBox1.Text = string.Format("Profesja: {0}\nPoziom: {1}\n\nDoświadczenie: {2} exp\nDo Lvl'a: {3} exp\n\nCapacity: {4}\nPunkty zycia: {5}\nPunkty many: {6}", profesja, poziom, doswiadczenie, expdolvla, capacity, punktyZycia, punktyMany  );
+      
+            richTextBox1.Text = string.Format("Profesja: {0}\nLVL: {1}\nMLVL: {2}\n\nDoświadczenie: {3} exp\nDo LVL'a: {4} exp\nDo MLVL'a: {5}\n\nCapacity: {6}\nPunkty zycia: {7}\nPunkty many: {8}\nSpeed: {9} ", profesja, lvl, mlvl, doswiadczenie, expdolvla, manaNaMlvl , capacity, punktyZycia, punktyMany, baseSpeed  );
             //"Profesja: " + profesja + "\nPoziom: " + poziom;
         }
     }
