@@ -1,6 +1,6 @@
 ﻿namespace tibicalc
 {
-    partial class Form1
+    partial class TibCalc
     {
         /// <summary>
         /// Required designer variable.
