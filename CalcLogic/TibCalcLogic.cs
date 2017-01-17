@@ -100,7 +100,7 @@ namespace CalcLogic
             }
             return capacity;
         }
-        public static decimal WyliczManeNaMLvl(string profesjaString, int mlvlLiczba)
+        public static decimal WyliczManeNaMlvl(string profesjaString, int mlvlLiczba)
         {
             decimal manaNaMlvl = 0;
             switch (profesjaString)

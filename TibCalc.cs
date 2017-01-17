@@ -86,7 +86,7 @@ namespace tibicalc
             int PunktyZycia = TibCalcLogic.WyliczPunktyZycia(profesjaString, poziomLiczba, poziomOpuszczeniaRookgaard);
             int punktyMany = TibCalcLogic.WyliczPunktyMany(profesjaString, poziomLiczba, poziomOpuszczeniaRookgaard);
             int capacity = TibCalcLogic.WyliczCapacity(profesjaString, poziomLiczba, poziomOpuszczeniaRookgaard);
-            decimal manaNaMlvl = TibCalcLogic.WyliczManeNaMLvl(profesjaString, mlvlLiczba);
+            decimal manaNaMlvl = TibCalcLogic.WyliczManeNaMlvl(profesjaString, mlvlLiczba);
             
 
             richTextBox1.Text = string.Format("Profesja: {0}\nLVL: {1}\nMLVL: {2}\n\nDoświadczenie: {3} exp\nDo LVL'a: {4} exp\nDo MLVL'a: {5}\n\nCapacity: {6}\nPunkty zycia: {7}\nPunkty many: {8}\nSpeed: {9} ", profesja, lvl, mlvl, doswiadczenie, expdolvla, manaNaMlvl, capacity, PunktyZycia, punktyMany, baseSpeed);

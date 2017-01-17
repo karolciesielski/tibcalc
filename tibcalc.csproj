@@ -98,6 +98,10 @@
       <Project>{9e58e7b9-3ef7-4313-babe-1bcda009d4c3}</Project>
       <Name>CalcLogic</Name>
     </ProjectReference>
+    <ProjectReference Include="UnitTests\UnitTests.csproj">
+      <Project>{cabf4472-b913-4d2a-b032-740d29b8d1f5}</Project>
+      <Name>UnitTests</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
